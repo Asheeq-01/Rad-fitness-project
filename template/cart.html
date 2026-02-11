@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    :root {
+        --gym-orange: #ff5f00;
+        --gym-dark: #111111;
+        --gym-gray: #f8fafc;
+        --border-color: #e2e8f0;
+    }
+
+    .cart-container { margin-top: 3rem; margin-bottom: 5rem; }
+    .cart-header { border-bottom: 2px solid var(--gym-dark); padding-bottom: 1rem; margin-bottom: 2rem; }
+
+    /* Cart Item Card */
+    .cart-item {
+        background: white;
+        border-radius: 20px;
+        padding: 20px;
+        border: 1px solid var(--border-color);
+        transition: 0.3s;
+        margin-bottom: 1.5rem;
+    }
+
+    .cart-item:hover {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        border-color: var(--gym-orange);
+    }
+
+    .product-img-box {
+        width: 100px;
+        height: 100px;
+        background: var(--gym-gray);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .product-img-box img { max-width: 90%; height: auto; object-fit: contain; }
+
+    /* Quantity Controls */
+    .qty-input {
+        display: flex;
+        align-items: center;
+        background: var(--gym-gray);
+        border-radius: 10px;
+        width: fit-content;
+        padding: 5px;
+    }
+
+    .qty-btn {
+        width: 32px;
+        height: 32px;
+        background: white;
+        border-radius: 8px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.2s;
+        text-decoration: none;
+        color: var(--gym-dark);
+    }
+
+    .qty-btn:hover { background: var(--gym-dark); color: white; }
+
+    /* Summary Card */
+    .summary-card {
+        background: white;
+        border-radius: 24px;
+        padding: 30px;
+        border: 1px solid var(--border-color);
+        position: sticky;
+        top: 100px;
+    }
+
+    .summary-title { font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.5rem; }
+    .summary-row { display: flex; justify-content: space-between; margin-bottom: 1rem; color: #64748b; }
+
+    .total-row {
+        border-top: 2px dashed var(--border-color);
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        font-weight: 900;
+        font-size: 1.4rem;
+        color: var(--gym-dark);
+    }
+
+    .btn-checkout {
+        background: var(--gym-dark);
+        color: white;
+        width: 100%;
+        padding: 18px;
+        border-radius: 14px;
+        font-weight: 800;
+        text-transform: uppercase;
+        border: none;
+        transition: 0.3s;
+    }
+
+    .btn-checkout:hover {
+        background: var(--gym-orange);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(255, 95, 0, 0.2);
+        color: white;
+    }
+
+    .remove-link { color: #94a3b8; transition: 0.2s; }
+    .remove-link:hover { color: #ef4444; }
+</style>
+
+<div class="container cart-container">
+    <div class="cart-header">
+        <h2 class="fw-black mb-0"><i class="fa-solid fa-cart-shopping me-2"></i>YOUR ORDER CART</h2>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-8">
+            {% for i in cart %}
+            <div class="cart-item">
+                <div class="row align-items-center">
+                    <div class="col-md-2 col-4">
+                        <div class="product-img-box">
+                            <img src="{{ i.product.image.url }}" alt="{{ i.product.name }}">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 col-8">
+                        <h6 class="fw-bold mb-0 text-uppercase">{{ i.product.name }}</h6>
+                        <small class="text-muted">Premium Series Gear</small>
+                    </div>
+
+                    <div class="col-md-3 col-6 mt-3 mt-md-0">
+                        <div class="qty-input">
+                            <a href="{% url 'minuscart' i.id %}" class="qty-btn">-</a>
+                            <span class="px-3 fw-bold">{{ i.quantity }}</span>
+                            <a href="{% url 'pluscart' i.id %}" class="qty-btn">+</a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-4 text-end mt-3 mt-md-0">
+                        <div class="fw-black text-dark">₹{{ i.product.price }}</div>
+                    </div>
+
+                    <div class="col-md-1 col-2 text-end mt-3 mt-md-0">
+                        <a href="{% url 'deletproduct' i.id %}" class="remove-link">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="text-center py-5">
+                <i class="fa-solid fa-box-open fa-4x text-light mb-3"></i>
+                <h4 class="text-muted">Your bag is empty!</h4>
+                <a href="{% url 'home' %}" class="btn btn-dark mt-3 px-4 rounded-pill">Shop Now</a>
+            </div>
+            {% endfor %}
+
+            <a href="{% url 'home' %}" class="btn btn-link text-dark fw-bold text-decoration-none mt-3">
+                <i class="fa-solid fa-arrow-left me-2"></i> CONTINUE SHOPPING
+            </a>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="summary-card shadow-lg border-0 p-4" style="background: #fff; border-radius: 30px; position: sticky; top: 110px;">
+                <h5 class="summary-title fw-black mb-4" style="letter-spacing: 1px; color: var(--gym-dark);">ORDER SUMMARY</h5>
+                
+                <div class="summary-details">
+                    <div class="summary-row d-flex justify-content-between mb-3">
+                        <span class="text-muted">Bag Subtotal</span>
+                        <span class="fw-bold text-dark">₹{{ total }}</span>
+                    </div>
+                    
+                    <div class="summary-row d-flex justify-content-between mb-3">
+                        <span class="text-muted">Delivery</span>
+                        <span class="text-success fw-bold">FREE</span>
+                    </div>
+                    
+                    <div class="summary-row d-flex justify-content-between mb-3">
+                        <span class="text-muted">Estimated GST</span>
+                        <span class="fw-bold text-dark">₹0</span>
+                    </div>
+                </div>
+        
+                <div class="total-row mt-4 pt-4 border-top border-2 border-dashed d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-column">
+                        <span class="fw-bold text-uppercase small text-muted">Grand Total</span>
+                        <span class="h3 fw-black mb-0" style="color: var(--gym-orange);">₹{{ total }}</span>
+                    </div>
+                    <i class="fa-solid fa-cart-check fa-2x opacity-25"></i>
+                </div>
+        
+                <a class="btn-checkout mt-4 d-flex align-items-center justify-content-center gap-2" 
+                   href="{% url 'checkout' %}" 
+                   style="background: var(--gym-dark); color: white; padding: 20px; border-radius: 18px; font-weight: 900; text-decoration: none; transition: 0.4s;">
+                    PROCEED TO CHECKOUT <i class="fa-solid fa-arrow-right"></i>
+                </a>
+        
+                <div class="trust-badge mt-4 p-3 rounded-4 d-flex align-items-center gap-3" style="background: #f0fdf4; border: 1px solid #dcfce7;">
+                    <i class="fa-solid fa-shield-check text-success fs-4"></i>
+                    <div>
+                        <p class="mb-0 fw-bold small text-success">Secure Transaction</p>
+                        <p class="mb-0 x-small text-muted" style="font-size: 0.7rem;">Your data is encrypted and safe.</p>
+                    </div>
+                </div>
+        
+                <div class="mt-4 text-center">
+                    <p class="x-small text-uppercase fw-bold text-muted mb-3" style="font-size: 0.65rem; letter-spacing: 1.5px;">We Accept</p>
+                    <div class="d-flex justify-content-center align-items-center gap-3 grayscale-icons">
+                        <img src="https://cdn-icons-png.flaticon.com/512/349/349221.png" width="30" class="opacity-75" alt="Visa">
+                        <img src="https://cdn-icons-png.flaticon.com/512/349/349228.png" width="30" class="opacity-75" alt="Mastercard">
+                        <img src="https://cdn-icons-png.flaticon.com/512/174/174861.png" width="30" class="opacity-75" alt="PayPal">
+                        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968279.png" width="30" class="opacity-75" alt="Apple Pay">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Energym</title>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Dosis:400,600,700|Poppins:400,600,700&display=swap"
+    rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div class="">
+    <!-- header section strats -->
+    <header class="">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="index.html">
+            <img src="{% static 'images/logo.png' %}" alt="" />
+            <span>
+            RAD FITTNESS
+            </span>
+          </a>
+          <div class="contact_nav" id="">
+            <ul class="navbar-nav ">
+              <li class="nav-item">
+                <a class="nav-link" href="service.html">
+                  <img src="{% static 'images/location.png' %}" alt="" />
+                  <span>Location</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="service.html">
+                  <img src="{% static 'images/call.png' %}" alt="" />
+                  <span>Call : + 01 1234567890</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="service.html">
+                  <img src="{% static 'images/envelope.png' %}" alt="" />
+                  <span>demo@gmail.com</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+    </header>
+    <!-- end header section -->
+    <!-- slider section -->
+    <section class=" slider_section position-relative">
+      <div class="container">
+        <div class="custom_nav2">
+          <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <div class="d-flex  flex-column flex-lg-row align-items-center">
+                <ul class="navbar-nav  ">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="about.html">About </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="service.html">Services </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact Us</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href=" {% url 'logout' %}">Logout</a>
+                  </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+                  <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+                </form>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+
+    <!-- end slider section -->
+  </div>
+{% block content%}
+
+{% endblock %}
+
+<section class="container-fluid footer_section ">
+    <p>
+      &copy; 2019 All Rights Reserved. Design by
+      <a href="https://html.design/">Free Html Templates</a>
+    </p>
+  </section>
+  <!-- footer section -->
+  <style>
+    :root {
+        --gym-orange: #ff5f00;
+        --gym-dark-bg: #111111;
+        --gym-dark-accent: #1a1a1a;
+        --text-gray: #94a3b8;
+    }
+
+    .gym-footer {
+        background-color: var(--gym-dark-bg);
+        color: white;
+        padding-top: 80px;
+        padding-bottom: 20px;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .footer-logo {
+        font-weight: 900;
+        font-size: 1.8rem;
+        letter-spacing: -1px;
+        color: white;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    .footer-logo span {
+        color: var(--gym-orange);
+    }
+
+    .footer-heading {
+        font-size: 1rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 25px;
+        position: relative;
+    }
+
+    .footer-heading::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        width: 30px;
+        height: 2px;
+        background: var(--gym-orange);
+    }
+
+    .footer-link {
+        color: var(--text-gray);
+        text-decoration: none;
+        display: block;
+        margin-bottom: 12px;
+        transition: 0.3s;
+        font-size: 0.95rem;
+    }
+
+    .footer-link:hover {
+        color: var(--gym-orange);
+        padding-left: 5px;
+    }
+
+    .social-icons {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .social-btn {
+        width: 40px;
+        height: 40px;
+        background: var(--gym-dark-accent);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        transition: 0.3s;
+        text-decoration: none;
+    }
+
+    .social-btn:hover {
+        background: var(--gym-orange);
+        color: white;
+        transform: translateY(-3px);
+    }
+
+    .contact-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 15px;
+        color: var(--text-gray);
+        font-size: 0.9rem;
+    }
+
+    .contact-item i {
+        color: var(--gym-orange);
+        margin-top: 4px;
+    }
+
+    .footer-bottom {
+        border-top: 1px solid rgba(255,255,255,0.05);
+        margin-top: 60px;
+        padding-top: 25px;
+    }
+
+    .payment-methods img {
+        height: 25px;
+        opacity: 0.6;
+        margin-left: 15px;
+        filter: grayscale(1);
+        transition: 0.3s;
+    }
+
+    .payment-methods img:hover {
+        opacity: 1;
+        filter: grayscale(0);
+    }
+
+    .newsletter-input {
+        background: var(--gym-dark-accent);
+        border: 1px solid #333;
+        color: white;
+        border-radius: 8px 0 0 8px;
+        padding: 12px;
+    }
+
+    .newsletter-btn {
+        background: var(--gym-orange);
+        border: none;
+        color: white;
+        font-weight: 700;
+        padding: 0 20px;
+        border-radius: 0 8px 8px 0;
+        transition: 0.3s;
+    }
+
+    .newsletter-btn:hover {
+        background: #e65600;
+    }
+</style>
+
+<footer class="gym-footer">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-4 col-md-6">
+                <a href="/" class="footer-logo">ENER<span>GYM</span></a>
+                <p class="text-gray mb-4" style="color: var(--text-gray); line-height: 1.6;">
+                    Premium fitness equipment and nutrition plans designed for elite athletes and beginners alike. We help you push your limits and crush your goals.
+                </p>
+                <div class="social-icons">
+                    <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-btn"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-6">
+                <h5 class="footer-heading">Shop Gear</h5>
+                <a href="#" class="footer-link">Strength Training</a>
+                <a href="#" class="footer-link">Cardio Equipment</a>
+                <a href="#" class="footer-link">Gym Accessories</a>
+                <a href="#" class="footer-link">Nutrition & Diet</a>
+                <a href="#" class="footer-link">Recovery Tools</a>
+            </div>
+
+            <div class="col-lg-2 col-md-6">
+                <h5 class="footer-heading">Support</h5>
+                <a href="#" class="footer-link">Track Your Order</a>
+                <a href="#" class="footer-link">Shipping Policy</a>
+                <a href="#" class="footer-link">Returns & Refunds</a>
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">FAQs</a>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <h5 class="footer-heading">Stay in the Loop</h5>
+                <p class="small text-gray mb-3" style="color: var(--text-gray);">Subscribe for exclusive workouts and 10% off your first order.</p>
+                <form class="d-flex mb-4">
+                    <input type="email" class="form-control newsletter-input" placeholder="Your email address">
+                    <button class="newsletter-btn" type="submit">JOIN</button>
+                </form>
+                
+                <div class="contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>123 Elite Street, Fitness Plaza, Kerala, India</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>+91 98765 43210</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <p class="small text-muted mb-3 mb-md-0">
+                &copy; 2026 ENER GYM. Built for Results.
+            </p>
+            <div class="payment-methods">
+                <img src="https://cdn-icons-png.flaticon.com/512/349/349221.png" alt="Visa">
+                <img src="https://cdn-icons-png.flaticon.com/512/349/349228.png" alt="Mastercard">
+                <img src="https://cdn-icons-png.flaticon.com/512/196/196566.png" alt="PayPal">
+                <img src="https://cdn-icons-png.flaticon.com/512/196/196565.png" alt="GPay">
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+</html>

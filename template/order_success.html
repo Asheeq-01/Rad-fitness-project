@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    :root {
+        --gym-orange: #ff5f00;
+        --gym-dark: #111111;
+        --cod-blue: #2563eb;
+    }
+
+    .success-wrapper {
+        min-height: 85vh;
+        background-color: #f8fafc;
+        padding: 40px 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    .order-card {
+        background: white;
+        border-radius: 35px;
+        max-width: 700px;
+        margin: auto;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+        overflow: hidden;
+        border: 1px solid #eef2f6;
+    }
+
+    .success-banner {
+        background: var(--gym-dark);
+        color: white;
+        padding: 50px 30px;
+        text-align: center;
+    }
+
+    .icon-badge {
+        width: 90px;
+        height: 90px;
+        background: var(--gym-orange);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        margin: 0 auto 20px;
+        border: 5px solid rgba(255,255,255,0.1);
+    }
+
+    .cod-tag {
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--cod-blue);
+        padding: 6px 16px;
+        border-radius: 50px;
+        font-weight: 800;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        padding: 30px;
+        background: #fdfdfd;
+    }
+
+    .info-box {
+        padding: 20px;
+        border-radius: 20px;
+        background: white;
+        border: 1px solid #f1f5f9;
+        text-align: center;
+    }
+
+    .label { font-size: 0.7rem; color: #94a3b8; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 5px; }
+    .value { font-size: 1.1rem; color: var(--gym-dark); font-weight: 800; }
+
+    .delivery-notice {
+        margin: 0 30px 30px;
+        padding: 20px;
+        background: #fff9f5;
+        border-left: 4px solid var(--gym-orange);
+        border-radius: 0 15px 15px 0;
+    }
+
+    .btn-action {
+        padding: 18px 30px;
+        border-radius: 15px;
+        font-weight: 900;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: 0.3s;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .btn-shop { background: var(--gym-dark); color: white; }
+    .btn-shop:hover { background: var(--gym-orange); color: white; transform: translateY(-3px); }
+</style>
+
+<div class="success-wrapper">
+    <div class="order-card">
+        <div class="success-banner">
+            <div class="cod-tag">Cash on Delivery Verified</div>
+            <div class="icon-badge">
+                <i class="fa-solid fa-truck-ramp-box"></i>
+            </div>
+            <h1 class="fw-black mb-2">ORDER PLACED!</h1>
+            <p class="opacity-75">Thank you, <strong>{{ request.user.first_name|default:request.user.username }}</strong>. Your fitness journey continues!</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-box">
+                <span class="label">Order Reference</span>
+                <span class="value">#{{ order.order_id }}</span>
+            </div>
+            <div class="info-box">
+                <span class="label">Payable at Door</span>
+                <span class="value" style="color: var(--gym-orange)">₹{{ order.amount }}</span>
+            </div>
+            <div class="info-box">
+                <span class="label">Expected Delivery</span>
+                <span class="value">Within 3-5 Days</span>
+            </div>
+            <div class="info-box">
+                <span class="label">Payment Mode</span>
+                <span class="value">COD</span>
+            </div>
+        </div>
+
+        <div class="delivery-notice">
+            <h6 class="fw-bold mb-1" style="color: var(--gym-orange)">
+                <i class="fa-solid fa-circle-exclamation me-1"></i> Keep Cash Ready
+            </h6>
+            <p class="small text-muted mb-0">
+                Please ensure someone is available at your address to receive the package and provide the payment to our delivery partner.
+            </p>
+        </div>
+
+        <div class="px-4 pb-5">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <a href="{% url 'home' %}" class="btn-action btn-shop text-center">Back to Store</a>
+                </div>
+                <div class="col-md-6">
+                    <a href="#" class="btn-action text-center border text-dark">Track My Order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

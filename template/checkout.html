@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+    :root {
+        --gym-orange: #ff5f00;
+        --gym-dark: #111111;
+        --gym-gray: #f8fafc;
+        --border-color: #e2e8f0;
+    }
+
+    .checkout-wrapper {
+        margin-top: 3rem;
+        margin-bottom: 5rem;
+    }
+
+    /* Modernizing Crispy Inputs */
+    .form-control, .select {
+        border-radius: 12px !important;
+        padding: 12px 18px !important;
+        border: 1px solid var(--border-color) !important;
+        background-color: var(--gym-gray) !important;
+        font-weight: 600 !important;
+    }
+
+    .form-control:focus {
+        border-color: var(--gym-orange) !important;
+        box-shadow: 0 0 0 4px rgba(255, 95, 0, 0.1) !important;
+        background-color: #fff !important;
+    }
+
+    .checkout-card {
+        background: white;
+        border-radius: 24px;
+        padding: 40px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    }
+
+    .section-title {
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--gym-dark);
+    }
+
+    /* Summary Side */
+    .order-summary-card {
+        background: var(--gym-dark);
+        color: white;
+        border-radius: 24px;
+        padding: 30px;
+        position: sticky;
+        top: 100px;
+    }
+
+    .summary-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        font-size: 0.95rem;
+        opacity: 0.8;
+    }
+
+    .btn-place-order {
+        background: var(--gym-orange);
+        color: white;
+        width: 100%;
+        padding: 18px;
+        border-radius: 14px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border: none;
+        margin-top: 20px;
+        transition: 0.3s;
+    }
+
+    .btn-place-order:hover {
+        background: #e65600;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(255, 95, 0, 0.3);
+    }
+
+    .item-mini-preview {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .mini-img {
+        width: 50px;
+        height: 50px;
+        background: white;
+        border-radius: 8px;
+        object-fit: contain;
+        padding: 5px;
+    }
+</style>
+
+<div class="container checkout-wrapper">
+    <div class="row g-5">
+        <div class="col-lg-7">
+            <div class="checkout-card">
+                <h4 class="section-title">
+                    <i class="fa-solid fa-truck-fast text-orange"></i> Shipping & Billing
+                </h4>
+                <hr class="mb-4">
+                
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            {{ form.address|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.phone|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.payment_method|as_crispy_field }}
+                        </div>
+                    </div>
+
+                    <div class="mt-4 p-3 bg-light rounded-3 d-flex align-items-center gap-3">
+                        <i class="fa-solid fa-shield-check text-success fs-4"></i>
+                        <small class="text-muted">Your data is encrypted and secure. By placing this order, you agree to our Terms of Service.</small>
+                    </div>
+
+                    <button type="submit" class="btn-place-order">
+                        Complete Purchase <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="order-summary-card">
+                <h5 class="fw-bold mb-4">ORDER RECAP</h5>
+
+                {% for item in cart_items %}
+                <div class="item-mini-preview">
+                    <img src="{{ item.product.image.url }}" class="mini-img">
+                    <div class="flex-grow-1">
+                        <div class="small fw-bold">{{ item.product.name }}</div>
+                        <small class="opacity-50">Qty: {{ item.quantity }}</small>
+                    </div>
+                    <div class="fw-bold">₹{{ item.subtotal }}</div>
+                </div>
+                {% endfor %}
+
+                <div class="mt-4">
+                    <div class="summary-item">
+                        <span>Merchandise Total</span>
+                        <span>₹{{ total }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Shipping & Handling</span>
+                        <span class="text-success fw-bold">FREE</span>
+                    </div>
+                    <hr class="opacity-25">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="fs-5 fw-bold">TOTAL AMOUNT</span>
+                        <span class="fs-3 fw-black text-warning">₹{{ total }}</span>
+                    </div>
+                </div>
+
+                <div class="mt-4 text-center opacity-50">
+                    <i class="fa-brands fa-cc-visa mx-2 fa-2x"></i>
+                    <i class="fa-brands fa-cc-mastercard mx-2 fa-2x"></i>
+                    <i class="fa-brands fa-google-pay mx-2 fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

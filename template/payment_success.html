@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    :root {
+        --gym-orange: #ff5f00;
+        --gym-dark: #111111;
+        --success-green: #10b981;
+    }
+
+    .success-wrapper {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8fafc;
+        padding: 20px;
+    }
+
+    .receipt-card {
+        background: white;
+        border-radius: 30px;
+        max-width: 600px;
+        width: 100%;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Success Header */
+    .receipt-header {
+        background: var(--gym-dark);
+        color: white;
+        padding: 40px;
+        text-align: center;
+        position: relative;
+    }
+
+    .check-circle {
+        width: 80px;
+        height: 80px;
+        background: var(--success-green);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        margin: 0 auto 20px;
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    /* Receipt Details */
+    .receipt-body {
+        padding: 40px;
+    }
+
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px dashed #e2e8f0;
+    }
+
+    .detail-label {
+        color: #64748b;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+    }
+
+    .detail-value {
+        color: var(--gym-dark);
+        font-weight: 800;
+    }
+
+    .total-banner {
+        background: #f1f5f9;
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .btn-action {
+        padding: 15px 30px;
+        border-radius: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: 0.3s;
+        text-decoration: none;
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+    }
+
+    .btn-continue {
+        background: var(--gym-orange);
+        color: white;
+        border: none;
+        margin-bottom: 10px;
+    }
+
+    .btn-orders {
+        background: white;
+        color: var(--gym-dark);
+        border: 2px solid var(--gym-dark);
+    }
+
+    .btn-action:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        color: white;
+    }
+
+    .btn-orders:hover {
+        background: var(--gym-dark);
+    }
+
+    @keyframes scaleIn {
+        from { transform: scale(0); }
+        to { transform: scale(1); }
+    }
+</style>
+
+<div class="success-wrapper">
+    <div class="receipt-card">
+        <div class="receipt-header">
+            <div class="check-circle">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h2 class="fw-black mb-1">ORDER CONFIRMED</h2>
+            <p class="opacity-75 mb-0">Your gear is being prepped for dispatch!</p>
+        </div>
+
+        <div class="receipt-body">
+            <div class="detail-row">
+                <span class="detail-label">Order ID</span>
+                <span class="detail-value text-primary">#{{ order.order_id }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Payment ID</span>
+                <span class="detail-value">{{ payment_id|default:"PAY_COD_SUCCESS" }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Date</span>
+                <span class="detail-value">{{ order.ordered_date|date:"D, d M Y" }}</span>
+            </div>
+
+            <div class="total-banner">
+                <span class="detail-label d-block mb-1">Total Paid</span>
+                <span class="h2 fw-black mb-0">₹{{ order.amount }}</span>
+            </div>
+
+            <p class="text-center text-muted small mb-4">
+                A confirmation email has been sent to <strong>{{ request.user.email }}</strong> with your tracking details.
+            </p>
+
+            <div class="row g-2">
+                <div class="col-sm-6">
+                    <a href="{% url 'home' %}" class="btn-action btn-continue">Keep Shopping</a>
+                </div>
+                <div class="col-sm-6">
+                    <a href="{% url 'cartview' %}" class="btn-action btn-orders">View Orders</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
