@@ -35,7 +35,7 @@
                                     <input class="form-check-input" type="checkbox" id="remember">
                                     <label class="form-check-label text-muted" for="remember">Remember me</label>
                                 </div>
-                                <a href="#" class="small text-primary text-decoration-none fw-bold">Forgot?</a>
+                                <a href="#" class="small text-warning text-decoration-none fw-bold">Forgot?</a>
                             </div>
 
                             <button type="submit" class="btn btn-primary w-100 py-3 fw-bold rounded-3 shadow-glow mb-3">
@@ -44,7 +44,7 @@
 
                             <div class="text-center mt-4">
                                 <p class="small text-muted mb-0">Don't have an account?</p>
-                                <a href="{% url 'signup' %}" class="text-primary fw-bold text-decoration-none">
+                                <a href="{% url 'signup' %}" class="text-warning fw-bold text-decoration-none">
                                     Signup <i class="bi bi-arrow-right ms-1"></i>
                                 </a>
                             </div>
@@ -64,7 +64,7 @@
     /* Centers the card perfectly on the screen */
     .login-page-wrapper {
         min-height: calc(100vh - 120px); /* Adjust based on navbar height */
-        background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.05), transparent);
+        background: radial-gradient(circle at top right, rgba(235, 133, 37, 0.05), transparent);
     }
 
     .brand-icon-circle {
@@ -96,14 +96,14 @@
 
     .form-control:focus {
         background-color: #ffffff !important;
-        border-color: #2563eb !important;
-        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1) !important;
+        border-color: #eb9925 !important;
+        box-shadow: 0 0 0 4px rgba(235, 156, 37, 0.1) !important;
     }
 
     .form-label {
         font-weight: 600;
         font-size: 0.85rem;
-        color: #475569;
+        color: #eb9925;
         margin-bottom: 8px;
     }
 
@@ -121,13 +121,13 @@
     }
 
     .btn-primary {
-        background-color: #2563eb;
+        background-color: #eb9925;
         border: none;
         transition: 0.3s;
     }
 
     .btn-primary:hover {
-        background-color: #1d4ed8;
+        background-color: #eb9925;
         transform: translateY(-2px);
     }
 </style>

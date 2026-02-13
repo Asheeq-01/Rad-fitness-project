@@ -215,7 +215,7 @@
             <div class="row g-4">
                 {% for i in product %}
                 <div class="col-md-6 col-xl-4">
-                    <a href="{% url 'get-product' i.id %}">
+                    <a href="{% url 'get-product' i.id %}" class="text-decoration-none">
                     <div class="product-card">
                         <div class="image-container">
                             <img src="{{ i.image.url }}" class="product-img" alt="{{ i.name }}">
